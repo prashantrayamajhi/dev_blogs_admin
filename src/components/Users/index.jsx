@@ -37,11 +37,11 @@ const Users = () => {
       <ToastContainer />
       {id && isDeleteOpen && (
         <Delete
-          title={"Do you want to delete this occupation ?"}
+          title={"Do you want to delete this user ?"}
           fetchData={fetchData}
-          route={`/admin/occupations/${id}`}
+          route={`/admin/users/${id}`}
           setIsDeleteOpen={setIsDeleteOpen}
-          toastMessage="Occupations deleted successfully"
+          toastMessage="User deleted successfully"
           toast={toast}
         />
       )}
@@ -62,7 +62,6 @@ const Users = () => {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
             <th scope="col">email</th>
             {/* <th scope="col">Phone Number</th> */}
           </tr>
@@ -72,9 +71,7 @@ const Users = () => {
             return (
               <tr scope="row" key={item.id}>
                 <td>{sn++}</td>
-                <td>{item.username}</td>
                 <td>{item.email}</td>
-                {/* <td>{item.phone}</td> */}
                 {/* <td className="d-flex gap-3">
                   <Link
                     to={`/occupation/create/${item.id}`}

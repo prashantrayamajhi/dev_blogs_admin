@@ -11,10 +11,9 @@ const CreateTopic = () => {
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(null);
   const { topicId } = useParams();
-  const [image, setImage] = useState(null);
-  const [displayImage, setDisplayImage] = useState("");
   const navigate = useNavigate();
   const [config, setConfig] = useState(null);
+
   useEffect(() => {
     setConfig({
       headers: {
@@ -29,8 +28,6 @@ const CreateTopic = () => {
         const res = await Axios.get(`/topics/${topicId}`);
         setId(res.data.data.id);
         setName(res.data.data.name);
-        setDisplayImage(res.data.data.image);
-        setImage(res.data.data.image);
       } catch (err) {
         console.log(err);
         if (err.response.data.status === 404) {
@@ -53,18 +50,14 @@ const CreateTopic = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("image", image);
+    const data = { name };
     try {
       if (id) {
-        await Axios.patch(`/admin/topics/${id}`, formData, config);
+        await Axios.patch(`/admin/topics/${id}`, data, config);
         toast.success("Topic Updated");
       } else {
-        await Axios.post("/admin/topics", formData, config);
+        await Axios.post("/admin/topics", data, config);
         setName("");
-        setImage(null);
-        setDisplayImage("");
         toast.success("Topic Created");
       }
       window.scrollTo(0, 0);
@@ -93,30 +86,7 @@ const CreateTopic = () => {
             }}
           />
         </div>
-        <div className="input-wrapper" style={{ marginTop: "1rem" }}>
-          <input
-            type="file"
-            name="image"
-            onChange={(e) => {
-              const img = URL.createObjectURL(e.target.files[0]);
-              setDisplayImage(img);
-              setImage(e.target.files[0]);
-            }}
-          />
-        </div>
 
-        {displayImage && (
-          <div className="display-img">
-            <img
-              src={displayImage}
-              alt=""
-              onClick={() => {
-                setImage(null);
-                setDisplayImage("");
-              }}
-            />
-          </div>
-        )}
         <button disabled={loading} className="mt-4">
           {id ? "Update" : "Create"}
         </button>

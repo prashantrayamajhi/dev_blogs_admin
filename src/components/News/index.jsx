@@ -70,6 +70,7 @@ const News = () => {
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
   };
+
   return (
     <>
       <ToastContainer />
@@ -118,10 +119,9 @@ const News = () => {
                 <tr scope="row" key={item.id} className="">
                   <td>{sn++}</td>
                   <td className="details-wrapper">
-                    <img src={item.image} alt="" className="thumbnail" />
                     <div className="details">
                       <h5>{item.title}</h5>
-                      <p>{item.previewText}</p>
+                      {/* <p>{item.previewText}</p> */}
                     </div>
                   </td>
 
