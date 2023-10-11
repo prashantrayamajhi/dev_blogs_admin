@@ -27,7 +27,7 @@ const News = () => {
   const fetchData = async () => {
     try {
       const res = await Axios.get(
-        `/admin/news?page=${page}&search=${search}`,
+        `/admin/blogs?page=${page}&search=${search}`,
         config
       );
       if (!search) {
@@ -78,7 +78,7 @@ const News = () => {
         <Delete
           title={"Do you want to delete this blog ?"}
           fetchData={fetchData}
-          route={`/admin/news/${id}`}
+          route={`/admin/blogs/${id}`}
           setIsDeleteOpen={setIsDeleteOpen}
           toastMessage="Blog deleted successfully"
           toast={toast}
@@ -121,7 +121,7 @@ const News = () => {
                   <td className="details-wrapper">
                     <div className="details">
                       <h5>{item.title}</h5>
-                      {/* <p>{item.previewText}</p> */}
+                      <p>{item.previewText}</p>
                     </div>
                   </td>
 

@@ -15,7 +15,7 @@ const CreateTopic = () => {
   const [previewText, setPreviewText] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
   const [topic, setTopic] = useState("");
-  const [news, setNews] = useState("");
+  const [blog, setBlog] = useState("");
 
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -60,7 +60,7 @@ const CreateTopic = () => {
         const topicArr = [];
 
         res.data.data.topics
-          .sort((a, b) => a.news_topic.order - b.news_topic.order)
+          .sort((a, b) => a.blog_topic.order - b.blog_topic.order)
           .forEach((item) => {
             topicArr.push({
               label: item.name,
@@ -71,7 +71,7 @@ const CreateTopic = () => {
         setId(res.data.data.id);
         setTitle(res.data.data.title);
         setPreviewText(res.data.data.previewText);
-        setNews(res.data.data.news);
+        setBlog(res.data.data.blog);
         setTopic(topicArr);
         setIsFeatured(res.data.data.isFeatured);
       } catch (err) {
@@ -99,7 +99,7 @@ const CreateTopic = () => {
     const data = {
       title,
       previewText,
-      news,
+      blog,
       isFeatured,
       topic,
     };
@@ -111,7 +111,7 @@ const CreateTopic = () => {
         await Axios.post("/admin/blogs", data, config);
         setTitle("");
         setPreviewText("");
-        setNews("");
+        setBlog("");
         setTopic([]);
         toast.success("Blog Created");
       }
@@ -127,7 +127,7 @@ const CreateTopic = () => {
   return (
     <>
       <ToastContainer theme="colored" />
-      <h3>{id ? "Update News Story" : "Write a News Story"}</h3>
+      <h3>{id ? "Update News   Story" : "Write a News Story"}</h3>
       <form className="mt-3" onSubmit={handleFormSubmit}>
         <div className="double-input-wrapper mb-3">
           <div className="input-wrapper">
@@ -162,8 +162,8 @@ const CreateTopic = () => {
             <label htmlFor="name">Blog Content</label>
             <ReactQuill
               theme="snow"
-              value={news}
-              onChange={setNews}
+              value={blog}
+              onChange={setBlog}
               style={{
                 backgroundColor: "#fff",
                 width: "63.5rem",

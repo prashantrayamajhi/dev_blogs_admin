@@ -8,7 +8,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!checkJwtToken()) {
-      navigate("/login");
+      return navigate("/login");
     }
   }, []);
 
