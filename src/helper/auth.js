@@ -12,7 +12,7 @@ const checkJwtToken = () => {
       if (current_time > decoded.exp) {
         logout();
       }
-      return true;
+      return token;
     } catch (err) {
       logout();
     }
