@@ -5,6 +5,7 @@ import "./../../styles/Form.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
+import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import Select from "react-select";
 
@@ -160,10 +161,13 @@ const CreateTopic = () => {
         <div className="double-input-wrapper mb-3">
           <div className="input-wrapper">
             <label htmlFor="name">Blog Content</label>
+            <EditorToolbar />
             <ReactQuill
               theme="snow"
               value={blog}
               onChange={setBlog}
+              modules={modules}
+              formats={formats}
               style={{
                 backgroundColor: "#fff",
                 width: "63.5rem",
