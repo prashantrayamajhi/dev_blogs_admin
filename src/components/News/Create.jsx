@@ -60,14 +60,12 @@ const CreateTopic = () => {
         const res = await Axios.get(`/admin/blogs/${newsId}`, config);
         const topicArr = [];
 
-        res.data.data.topics
-          .sort((a, b) => a.blog_topic.order - b.blog_topic.order)
-          .forEach((item) => {
-            topicArr.push({
-              label: item.name,
-              value: item.id,
-            });
+        res.data.data.topics.forEach((item) => {
+          topicArr.push({
+            label: item.name,
+            value: item.id,
           });
+        });
 
         setId(res.data.data.id);
         setTitle(res.data.data.title);
